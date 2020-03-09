@@ -210,4 +210,24 @@ public class PlayerControls : MonoBehaviour
         }
     }
 
+    public void SavePlayer()
+    {
+        SaveAndLoad.SavePlayer(this);
+    }
+
+    public void LoadPlayer()
+    {
+        PlayerData pData = SaveAndLoad.LoadPlayer();
+
+        Vector3 position;
+        position.x = pData.position[0];
+        position.y = pData.position[1];
+        position.z = pData.position[2];
+
+        transform.position = position;
+
+        // damit wenn man wärend einer bewegung läd nicht die bewegung weiter geht wenn man zurückgesetzt wird
+        rb.velocity = new Vector2(0, 0);
+    }
+
 }
